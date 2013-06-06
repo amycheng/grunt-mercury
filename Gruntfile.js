@@ -73,7 +73,7 @@ module.exports = function(grunt) {
                 tasks: ['copy:images','livereload']
             },
             html: {
-                files: [dev_html+'/**/*.html'],
+                files: [dev_html+'/**/*.hbs'],
                 tasks: ['assemble:html','livereload']
             }
         },
