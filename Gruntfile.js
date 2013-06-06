@@ -61,11 +61,11 @@ module.exports = function(grunt) {
         },
         regarde: {
             css: {
-                files: [target_css+'/*'],
+                files: [dev_css+'/*'],
                 tasks: ['sass:dev','livereload']
             },
             js: {
-                files: [target_js+'/*'],
+                files: [dev_js+'/*'],
                 tasks: ['concat:javascript','livereload']
             },
             images: {
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
                 tasks: ['copy:images','livereload']
             },
             html: {
-                files: [target+'/**/*.html'],
+                files: [dev_html+'/**/*.html'],
                 tasks: ['assemble:html','livereload']
             }
         },
