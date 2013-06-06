@@ -27,8 +27,8 @@ module.exports = function(grunt) {
             html: {
                 options: {
                     engine: 'handlebars',
-                    partials: 'html/*.hbs',
-                    data: 'html/data/data.json'
+                    partials: dev_html+'/*.hbs',
+                    data: dev_html+'_/data/data.json'
                 },
                 files: {
                     'site/index.html' : dev_html+'/index.hbs'
