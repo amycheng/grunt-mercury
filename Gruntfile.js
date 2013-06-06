@@ -31,7 +31,7 @@ module.exports = function(grunt) {
                     data: 'html/data/data.json'
                 },
                 files: {
-                    '../site/index.html' : dev_html+'/index.hbs'
+                    'site/index.html' : dev_html+'/index.hbs'
                 }
             }
         },
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
                     compass: true
                 },
                 files: {
-                    '../_site/css/style.css': [
+                    'site/css/style.css': [
                         dev_css+'/*.scss'
                     ]
                 }
