@@ -1,14 +1,6 @@
 /*global module:false*/
 
-//for livereload
-'use strict';
-var path = require('path');
-var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 
-var folderMount = function folderMount(connect, point) {
-    return connect.static(path.resolve(point));
-};
-//
 
 module.exports = function(grunt) {
     //CUSTOMIZE OR ADD VARIABLES TO HAVE GRUNT LOOK AT THE CORRECT ASSETS
@@ -39,16 +31,13 @@ module.exports = function(grunt) {
             javascript: {
                 src:[],
                 dest: target_js+'/script.js'
-            } 
+            }
         },
         connect: {
-            livereload: {
+            server: {
                 options: {
                     port: 9001,
-                    base: target,
-                    middleware: function(connect, options) {
-                        return [lrSnippet, folderMount(connect, options.base)];
-                    }
+                    base: target
                 }
             }
         },
@@ -59,27 +48,31 @@ module.exports = function(grunt) {
                 ]
             }
         },
-        regarde: {
+        watch: {
+            options: {
+                livereload: true,
+                nospawn: false
+            },
             css: {
                 files: [dev_css+'/*'],
-                tasks: ['sass:dev','livereload']
+                tasks: ['sass:dev']
             },
             js: {
                 files: [dev_js+'/*'],
-                tasks: ['concat:javascript','livereload']
+                tasks: ['concat:javascript']
             },
             images: {
                 files:[dev_img+'/*'],
-                tasks: ['copy:images','livereload']
+                tasks: ['copy:images']
             },
             html: {
                 files: [dev_html+'/**/*.hbs'],
-                tasks: ['assemble:html','livereload']
+                tasks: ['assemble:html']
             }
         },
-        sass: { //compile CSS from SASS                              
-            dev: {                             
-                options: {                      
+        sass: { //compile CSS from SASS
+            dev: {
+                options: {
                     style: 'expanded',
                     noCache: false,
                     lineNumbers: false,
@@ -91,7 +84,7 @@ module.exports = function(grunt) {
                     ]
                 }
             }
-        }    
+        }
 
     });
 
@@ -99,8 +92,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-livereload');
-    grunt.loadNpmTasks('grunt-regarde');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.registerTask('dev', ['assemble','sass','concat','livereload-start','connect', 'regarde']);
+    grunt.registerTask('dev', ['assemble','sass','concat','connect', 'watch']);
 };
