@@ -44,7 +44,11 @@ module.exports = function(grunt) {
         copy: {
             images: {
                 files: [
-                    {expand: true, src: ['_dev/images/**'], dest: 'site/images/'} // includes files in path and its subdirs
+                    {
+                    expand: true,
+                     cwd: ['_dev/images/'],
+                     src: '*',
+                      dest: 'site/images/'} // includes files in path and its subdirs
                 ]
             }
         },
